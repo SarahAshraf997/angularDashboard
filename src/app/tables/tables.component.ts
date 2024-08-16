@@ -22,7 +22,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 @Injectable()
 export class TablesComponent implements OnInit, AfterViewInit {
   constructor(private http: HttpClient) {}
-  public data: any;
+  public DataTable: any;
   getUsers(): Observable<IUser[]> {
     return this.http.get<IUser[]>('https://reqres.in/api/users?page={page}');
   }
@@ -35,7 +35,7 @@ export class TablesComponent implements OnInit, AfterViewInit {
       .get<IUser[]>('https://reqres.in/api/users?page={page}')
       .subscribe((res: any) => {
         console.log(res);
-        this.data = res.data;
+        this.DataTable = res.data;
       });
   }
 
