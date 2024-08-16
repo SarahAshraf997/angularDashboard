@@ -1,0 +1,14 @@
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 50%;
+}
+.middle-section {
+  display: flex;
+  justify-content: space-between;
+}
+.card {
+  width: 30%;
+  height: 70%;
+}
