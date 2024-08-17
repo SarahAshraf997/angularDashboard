@@ -1,4 +1,6 @@
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 import {
   Component,
   Injectable,
@@ -29,7 +31,7 @@ import { SearchPipe } from './search.pipe';
 })
 @Injectable()
 export class TablesComponent implements OnInit, AfterViewInit {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
   public DataTable: any;
   public text: any;
   public page: number = 1;
@@ -53,7 +55,15 @@ export class TablesComponent implements OnInit, AfterViewInit {
     console.log('heelo');
     this.fetchdata();
   }
-
+  public getUser(id: number) {
+    this.http
+      .get<IUser[]>(` https://reqres.in/api/users/${id}.`)
+      .subscribe((res: any) => {
+        console.log('id=' + id);
+        this.DataTable = res.data;
+      });
+    this.router.navigate(['/Statistics', id]);
+  }
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
