@@ -1,5 +1,6 @@
+<input type="text" class="form-control" [(ngModel)]="text" />
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="DataTable">
+  <table mat-table [dataSource]="DataTable | search : text">
     <!-- Position Column -->
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -31,7 +32,7 @@
   </table>
 
   <mat-paginator
-    [pageSizeOptions]="[5, 10, 20]"
+    [pageSizeOptions]="[6]"
     showFirstLastButtons
     aria-label="Select page of periodic elements"
   >

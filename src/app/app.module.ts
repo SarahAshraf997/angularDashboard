@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routes';
 import { UsertablesComponent } from './usertables/usertables.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { SearchPipe } from './tables/search.pipe';
 @NgModule({
   declarations: [],
   imports: [
@@ -16,6 +18,7 @@ import { UsertablesComponent } from './usertables/usertables.component';
     ReactiveFormsModule,
     MatInputModule,
     UsertablesComponent,
+    SearchPipe,
   ],
 })
 export class AppModule {}

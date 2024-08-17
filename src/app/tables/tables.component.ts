@@ -6,16 +6,24 @@ import {
   PipeTransform,
   AfterViewInit,
   ViewChild,
+  NgModule,
 } from '@angular/core';
 import { IUser } from './Users';
 import { Observable } from 'rxjs';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-
+import { FormsModule } from '@angular/forms';
+import { SearchPipe } from './search.pipe';
 @Component({
   selector: 'app-tables',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatPaginator],
+  imports: [
+    MatTableModule,
+    MatPaginatorModule,
+    MatPaginator,
+    FormsModule,
+    SearchPipe,
+  ],
   templateUrl: './tables.component.html',
   styleUrl: './tables.component.css',
 })
@@ -23,6 +31,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 export class TablesComponent implements OnInit, AfterViewInit {
   constructor(private http: HttpClient) {}
   public DataTable: any;
+  public text: any;
   getUsers(): Observable<IUser[]> {
     return this.http.get<IUser[]>('https://reqres.in/api/users?page={page}');
   }
