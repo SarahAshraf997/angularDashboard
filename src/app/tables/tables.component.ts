@@ -32,6 +32,7 @@ export class TablesComponent implements OnInit, AfterViewInit {
   constructor(private http: HttpClient) {}
   public DataTable: any;
   public text: any;
+  public page: number = 1;
   getUsers(): Observable<IUser[]> {
     return this.http.get<IUser[]>('https://reqres.in/api/users?page={page}');
   }
@@ -41,11 +42,16 @@ export class TablesComponent implements OnInit, AfterViewInit {
   }
   public fetchdata(): any {
     this.http
-      .get<IUser[]>('https://reqres.in/api/users?page={page}')
+      .get<IUser[]>(`https://reqres.in/api/users?page=${this.page}`)
       .subscribe((res: any) => {
         console.log(res);
         this.DataTable = res.data;
       });
+  }
+  public goNext() {
+    this.page++;
+    console.log('heelo');
+    this.fetchdata();
   }
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];

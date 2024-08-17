@@ -34,6 +34,7 @@
   <mat-paginator
     [pageSizeOptions]="[6]"
     showFirstLastButtons
+    (click)="goNext()"
     aria-label="Select page of periodic elements"
   >
   </mat-paginator>
