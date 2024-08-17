@@ -62,7 +62,7 @@ export class TablesComponent implements OnInit, AfterViewInit {
         console.log('id=' + id);
         this.DataTable = res.data;
       });
-    this.router.navigate(['/Statistics', id]);
+    this.router.navigate(['/Statistics']);
   }
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
