@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { MatIconModule } from '@angular/material/icon';
 import {
   Component,
   Injectable,
@@ -11,11 +11,12 @@ import {
   NgModule,
 } from '@angular/core';
 import { IUser } from './Users';
-import { Observable } from 'rxjs';
+import { Observable, startWith } from 'rxjs';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from './search.pipe';
+const CashKey = 'httpRepoCash';
 @Component({
   selector: 'app-tables',
   standalone: true,
@@ -25,16 +26,26 @@ import { SearchPipe } from './search.pipe';
     MatPaginator,
     FormsModule,
     SearchPipe,
+    MatIconModule,
   ],
   templateUrl: './tables.component.html',
   styleUrl: './tables.component.css',
 })
 @Injectable()
 export class TablesComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.dataSource.paginator = this.paginator;
+    }
+  }
   constructor(private http: HttpClient, private router: Router) {}
   public DataTable: any;
   public text: any;
   public page: number = 1;
+  public totalPageNumber: number = 1;
+  public hasPrevPage: boolean = false;
+  public hasNextPage: boolean = true;
   getUsers(): Observable<IUser[]> {
     return this.http.get<IUser[]>('https://reqres.in/api/users?page={page}');
   }
@@ -42,38 +53,66 @@ export class TablesComponent implements OnInit, AfterViewInit {
     this.fetchdata();
     // this.data = this.fetchdata.name;
   }
+  public onPageChange(event: any) {
+    // console.log('Page changed:', event);
+    // Perform actions when the page is changed
+  }
   public fetchdata(): any {
     this.http
       .get<IUser[]>(`https://reqres.in/api/users?page=${this.page}`)
       .subscribe((res: any) => {
         console.log(res);
         this.DataTable = res.data;
+        this.totalPageNumber = res.total_pages;
+        if (this.page >= this.totalPageNumber) {
+          this.hasNextPage = false;
+        }
       });
   }
   public goNext() {
-    this.page++;
-    console.log('heelo');
-    this.fetchdata();
+    if (this.hasNextPage) {
+      this.page++;
+      this.paginator?.nextPage();
+      this.fetchdata();
+      if (this.page >= this.totalPageNumber) {
+        this.hasNextPage = false;
+      }
+      this.hasPrevPage = true;
+    }
   }
+
+  public goPrevious() {
+    if (this.hasPrevPage) {
+      this.page--;
+      this.paginator?.previousPage();
+      this.fetchdata();
+      if (this.page == 1) {
+        this.hasPrevPage = false;
+        if (this.totalPageNumber > 1) {
+          this.hasNextPage = true;
+        }
+      }
+    }
+  }
+
   public getUser(id: number) {
     this.http
       .get<IUser[]>(` https://reqres.in/api/users/${id}.`)
       .subscribe((res: any) => {
         console.log('id=' + id);
         this.DataTable = res.data;
+        localStorage[CashKey] = JSON.stringify(res);
       });
-    this.router.navigate(['/Statistics']);
+    // this.DataTable = this.DataTable.pipe(
+    //   startWith(JSON.parse(localStorage[CashKey] || '[]'))
+    // );
+    this.router.navigate(['/UserDetails', this.DataTable.id]);
   }
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   // @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
-  ngAfterViewInit() {
-    if (this.paginator) {
-      this.dataSource.paginator = this.paginator;
-    }
-  }
 }
 
 export interface PeriodicElement {

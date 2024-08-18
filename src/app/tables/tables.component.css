@@ -11,3 +11,67 @@ img {
   font-weight: bold;
   color: white;
 }
+
+input {
+  width: 200px;
+  height: 40px;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: #7b8199;
+  background-color: #f0f2f5;
+  margin-right: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  font-weight: bold;
+  color: #7b8199;
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+button {
+  width: 100px;
+  height: 40px;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: #3a90ea;
+  background-color: #f0f2f5;
+  color: #3a90ea;
+  width: 40px; /* Set a fixed width */
+  height: 40px; /* Set a fixed height */
+  border-radius: 50%; /* Make the button circular */
+  display: flex; /* Use flexbox to center the icon */
+  align-items: center; /* Center icon vertically */
+  justify-content: center; /* Center icon horizontally */
+  padding: 0; /* Remove default padding */
+  /* Background color (Angular Material's primary color) */
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow for better visibility */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  width: 100px;
+  height: 40px;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: #e23571;
+  background-color: #f0f2f5;
+  color: #e23571;
+  width: 100px;
+  height: 40px;
+  border-style: solid;
+  border-radius: 10px;
+
+  width: 40px; /* Set a fixed width */
+  height: 40px; /* Set a fixed height */
+  border-radius: 50%; /* Make the button circular */
+  display: flex; /* Use flexbox to center the icon */
+  align-items: center; /* Center icon vertically */
+  justify-content: center; /* Center icon horizontally */
+  padding: 0; /* Remove default padding */
+  /* Background color (Angular Material's primary color) */
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow for better visibility */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease;
+}

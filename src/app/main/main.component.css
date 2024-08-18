@@ -5,9 +5,28 @@
   height: 50%;
 }
 .middle-section {
-  display: flex;
-  justify-content: space-between;
+  display: flex; /* Enable Flexbox */
+  justify-content: space-between; /* Space out the containers */
+  gap: 20px; /* Space between the containers */
+  padding: 20px; /* Optional: padding around the container */
 }
+
+.chart-container {
+  flex: 1; /* Make each container take up equal space */
+  background-color: white; /* White background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 10px; /* Padding inside the container */
+  height: 550px; /* Fixed height for the containers */
+  display: flex; /* Ensure the chart inside takes up full space */
+  align-items: center; /* Center the chart vertically */
+  justify-content: center; /* Center the chart horizontally */
+  box-sizing: border-box; /* Include padding and border in the height and width */
+}
+.chart {
+  width: 100%; /* Full width of the container */
+  height: 100%; /* Full height of the container */
+}
+
 .card {
   width: 30%;
   height: 70%;

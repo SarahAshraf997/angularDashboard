@@ -1,0 +1,15 @@
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh; /* Full viewport height */
+  width: 100%; /* Full width */
+  text-align: center; /* Center the text */
+}
+
+.large-spinner {
+  width: 100px; /* Set spinner width */
+  height: 100px; /* Set spinner height */
+}
